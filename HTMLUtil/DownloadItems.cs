@@ -5,8 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DownloadFromInternet
-{
+namespace HTMLUtil {
     public class DownloadItems
     {
         Dictionary<string, string> m_cache = new Dictionary<string, string>();
