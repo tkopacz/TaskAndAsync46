@@ -21,6 +21,7 @@ namespace HTMLUtilTest {
                 DownloadItems d = new DownloadItems();
                 var str = await d.Download(url);
                 var str1 = await d.Download(url);
+                var str2 = await d.Download(url);
                 Assert.AreEqual(str1, str);
             }).Wait();
 
