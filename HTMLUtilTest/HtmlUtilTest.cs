@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HTMLUtil;
+using System.Threading.Tasks;
 
 namespace HTMLUtilTest {
     [TestClass]
@@ -11,6 +12,17 @@ namespace HTMLUtilTest {
             TextInHTML t = new TextInHTML(str);
             t.Prepare();
             Assert.AreEqual("foo bar baz", t.Text);
+
+        }
+        [TestMethod]
+        public  void HtmlUtilDownload() {
+            Task.Run(async () => {
+                string url = "http://msdn.microsoft.com";
+                DownloadItems d = new DownloadItems();
+                var str = await d.Download(url);
+                var str1 = await d.Download(url);
+                Assert.AreEqual(str1, str);
+            }).Wait();
 
         }
     }
