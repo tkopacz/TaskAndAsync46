@@ -4,3 +4,4 @@
 - zliczamy wszystkie słowa (rzeczy oddzielone spacją / tabem), i liczymy ile słowo ma wystąpień
 - później - liczymy zbitki słów
 - liczymy odległości między słowami
+- rekurencja lokalna (potem Service Fabric i Orleans)
