@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,14 +17,18 @@ namespace HTMLUtil
             m_html = html;
         }
 
-        public void Prepare() {
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(m_html);
-            m_text = doc.DocumentNode.InnerText;
-            foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]")) {
-                string hrefValue = link.GetAttributeValue("href", string.Empty);
-                Links.Add(hrefValue);
-            }
+        public async Task<long> Process() {
+            Stopwatch sw = Stopwatch.StartNew();
+            await Task.Run(() => {
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(m_html);
+                m_text = doc.DocumentNode.InnerText;
+                foreach (HtmlNode link in doc.DocumentNode.SelectNodes("//a[@href]")) {
+                    string hrefValue = link.GetAttributeValue("href", string.Empty);
+                    Links.Add(hrefValue);
+                }
+            }).ConfigureAwait(false);
+            return Task.FromResult<long>(sw.ElapsedMilliseconds)
         }
 
     }
